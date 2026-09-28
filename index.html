@@ -10,9 +10,48 @@
 </head>
 
 <body>
+    <header>
+        <p>logo</p>
+        <p class="compteur">Compteur anomalie</p>
+    </header>
 
     <main>
+        <form action="">
+            <div class="formChamp">
+                <label for="title">Titre</label>
+                <input type="text" id = "title" name="title">
+            </div>
 
+            <div class="formChamp">
+                <label for="autor">Auteur</label>
+                <input type="text" id = "auteur" name="auteur">
+            </div>
+
+            <div class="formChamp">
+                <label for="title">Sévérité</label>
+                <select name="sévérité" id="sévérité">
+                    <option value="">Choisir une sévérité</option>
+                    <option value="">Basse</option>
+                    <option value="">Moyenne</option>
+                    <option value="">Critique</option>
+                </select>
+            </div>
+
+            <div class="formChamp">
+                <label for="reward">Récompense</label>
+                <input type="number" id = "reward" name="reward">
+            </div>
+
+            <div class="formChamp">
+                <label for="description">Description</label>
+                <input type="number" id = "description" name="description">
+            </div>
+
+        </form>
+
+        <div class="listBug" id = "bug-grid">
+
+        </div>
     </main>
 
     <script src="app.js"></script>
