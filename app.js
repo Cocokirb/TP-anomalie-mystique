@@ -26,15 +26,20 @@ const bugs = [
 ];
 
 const listeBugs = document.querySelector("#bug-grid")
+const compteurBugs = document.querySelector("#nombreBugs")
 
 function afficherBugs() {
 
     if (bugs.length === 0){
         listeBugs.innerHTML = '<p> Aucun bug présent </p>'
         return ; 
+    }else{
+        const texteCompteurBugs = `<p> Nombre de bugs a résoudre : ${bugs.length}</p>`
+        compteurBugs.innerHTML = texteCompteurBugs
     }
 
     const contenuHTML = bugs.map( (bug) => {   
+    
     return ` 
         <article class="bug" data-id = "${bug.id}">
             <div>
