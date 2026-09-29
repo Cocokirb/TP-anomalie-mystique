@@ -27,6 +27,21 @@ const bugs = [
 
 const listeBugs = document.querySelector("#bug-grid")
 const compteurBugs = document.querySelector("#nombreBugs")
+const formulaireBugs = document.querySelector("#bugsForm")
+
+
+const titleInput = document.getElementById("title");
+const autorInput = document.getElementById("autor");
+const severiteInput = document.getElementById("severite");
+const recompenseInput = document.getElementById("recompense");
+const descriptionInput = document.getElementById("description");
+
+const errorTitle = document.getElementById("error-title");
+const errorAutor = document.getElementById("error-autor");
+const errorSeverite = document.getElementById("error-severite");
+const errorRecompense = document.getElementById("error-recompense");
+const errorDescription = document.getElementById("error-description");
+
 
 function afficherBugs() {
 
@@ -58,5 +73,75 @@ function afficherBugs() {
     })
     listeBugs.innerHTML = contenuHTML.join(" ");
 };
+
+function effacerErreur (){
+    errorTitle.textContent = "" ;
+    errorAutor.textContent = "" ;
+    errorSeverite.textContent = "" ;
+    errorRecompense.textContent = "" ;
+    errorDescription.textContent = "" ;
+}
+
+function validerFormulaire () {
+    let estValide = true;
+
+  // Validation Titre
+  if(titleInput.value.trim().length < 2){
+    errorTitle.textContent = "Le titre doit contenir au moins 2 caractères";
+    estValide = false;
+  }  
+
+  // Validation auteur
+  if(autorInput.value.trim().length < 2){
+    errorAutor.textContent = "L'auteur doit contenir au moins 2 caractères";
+    estValide = false;
+  }  
+
+  // Validation severite
+  if(severiteInput.value === ""){
+    errorSeverite.textContent = "Veuillez sélectionner une sévérité";
+    estValide = false;
+  }
+
+  // Validation récompense
+  if(isNaN (recompenseInput.value) || recompenseInput.value <= 0){
+    errorRecompense.textContent = "La récompense doit être un nombre supérieur à 0";
+    estValide = false;
+  }   
+
+  // Validation Description
+  if(descriptionInput.value.trim().length < 5 ){
+    errorDescription.textContent = "La description doit contenir au moins 2 caractères";
+    estValide = false;
+  }  
+
+  return estValide ;                                                                                      
+
+}
+
+formulaireBugs.addEventListener("submit" , function(event) {
+    event.preventDefault()
+
+    effacerErreur()
+
+    if (!validerFormulaire()) {
+    return;
+  }
+
+  const nouveauBugs = {
+    id: Date.now(),
+    titre: titleInput.value.trim(),
+    auteur: autorInput.value.trim(),
+    severite: severiteInput.value,
+    description: descriptionInput.value.trim(),
+    recompense: parseInt(recompenseInput.value , 10)
+  }
+
+  bugs.push(nouveauBugs)
+
+  formulaireBugs.reset()
+
+  afficherBugs()
+})
 
 afficherBugs() ;

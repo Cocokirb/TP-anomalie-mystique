@@ -1,13 +1,13 @@
 :root {
 	color-scheme: dark;
 	font-family: "Segoe UI", sans-serif;
-	background: #111615;
-	color: #e8efeb;
+	background: #455a56;
+	color: #fafcfb;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
-	--surface: #1b2421;
-	--surface-raised: #222e29;
-	--border: #35443d;
+	--surface: #263b34;
+	--surface-raised: #263f35;
+	--border: #30463b;
 	--text-muted: #a4b4aa;
 	--accent: #9be3b3;
 }
@@ -20,7 +20,7 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	margin: 0;
-	background: radial-gradient(ellipse at top left, #26372e 0, #111615 48rem);
+	background: radial-gradient(ellipse at top left, #192920 0, #1e3330 48rem);
 }
 
 header {
@@ -105,10 +105,14 @@ button:hover {
 .listBug {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-	align-items: start;
+	grid-auto-rows: 1fr;
 	gap: 1rem;
 }
 
+.error {
+    color: red;
+    font-size: 13px;
+}
 .bug {
 	display: flex;
 	min-width: 0;
@@ -155,6 +159,7 @@ button:hover {
 	background: #4b2224;
 	color: #ff9699;
 }
+
 
 .delete-button {
 	align-self: flex-start;

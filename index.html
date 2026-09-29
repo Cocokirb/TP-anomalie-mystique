@@ -17,38 +17,44 @@
     </header>
 
     <main>
-        <form action="">
+        <form id = "bugsForm" novalidate>
+            <h2>Ajouter un bug</h2>
             <div class="formChamp">
                 <label for="title">Titre</label>
                 <input type="text" id = "title" name="title">
+                <p class="error" id="error-title"></p>
             </div>
 
             <div class="formChamp">
                 <label for="autor">Auteur</label>
-                <input type="text" id = "auteur" name="auteur">
+                <input type="text" id = "autor" name="auteur">
+                <p class="error" id="error-autor"></p>
             </div>
 
             <div class="formChamp">
                 <label for="title">Sévérité</label>
-                <select name="sévérité" id="sévérité">
+                <select name="sévérité" id="severite">
                     <option value="">Choisir une sévérité</option>
-                    <option value="">Basse</option>
-                    <option value="">Moyenne</option>
-                    <option value="">Critique</option>
+                    <option value="Basse">Basse</option>
+                    <option value="Moyenne">Moyenne</option>
+                    <option value="Critique">Critique</option>
                 </select>
+                <p class="error" id="error-severite"></p>
             </div>
 
             <div class="formChamp">
-                <label for="reward">Récompense</label>
-                <input type="number" id = "reward" name="reward">
+                <label for="recompense">Récompense</label>
+                <input type="number" id = "recompense" name="recompense">
+                <p class="error" id="error-recompense"></p>
             </div>
 
             <div class="formChamp">
                 <label for="description">Description</label>
-                <input type="number" id = "description" name="description">
+                <input type="text" id = "description" name="description">
+                <p class="error" id="error-description"></p>
             </div>
 
-            <button type="submit">Ajouter le bugs</button>
+            <button type="submit">Ajouter le bug</button>
 
         </form>
 
