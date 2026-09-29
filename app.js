@@ -44,6 +44,7 @@ function afficherBugs() {
         <article class="bug" data-id = "${bug.id}">
             <div>
                 <h3>${bug.titre}</h3>
+                <span class="badge-severite severite-${bug.severite.toLowerCase()}">${bug.severite}</span>
                 <p>Auteur : ${bug.auteur}</p>
                 <p>Description ${bug.description}</p>
                 <p class = "statut"> </p>
