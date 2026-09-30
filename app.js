@@ -25,6 +25,8 @@ let bugs = [
 }
 ];
 
+let filtreActif = "Tous"
+
 const listeBugs = document.querySelector("#bug-grid")
 const compteurBugs = document.querySelector("#nombreBugs")
 const formulaireBugs = document.querySelector("#bugsForm")
@@ -67,7 +69,7 @@ function afficherBugs() {
                 <p>Récompense : ${bug.recompense}
             </div>
                 <button type="button" class="delete-button">
-                  Supprimer
+                  Résoudre
                 </button>
         </article>
     `
@@ -140,6 +142,34 @@ function supprimerBugs(id){
     return bug.id !== id;
   });
   afficherBugs();
+}
+
+// Synchroniser l'affichage en fonction des filtre
+function renderBugs (filtre){
+  if(filtreActif ==="Tous"){
+    afficherBugs()
+  }else{
+    const listeFiltrer = bugs.filter(bug => 
+      bug.severite === filtre
+    ).map( bug => {
+    return ` 
+        <article class="bug" data-id = "${bug.id}">
+            <div>
+                <h3>${bug.titre}</h3>
+                <span class="badge-severite severite-${bug.severite.toLowerCase()}">${bug.severite}</span>
+                <p>Auteur : ${bug.auteur}</p>
+                <p>Description ${bug.description}</p>
+                <p class = "statut"> </p>
+                <p>Récompense : ${bug.recompense}
+            </div>
+                <button type="button" class="delete-button" data-id = "${bug.id}">
+                  Résoudre
+                </button>
+        </article>
+    `
+    })
+    listeBugs.innerHTML = listeFiltrer.join(" ") ;
+  }
 }
 
 formulaireBugs.addEventListener("submit" , function(event) {
