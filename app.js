@@ -1,4 +1,4 @@
-const bugs = [
+let bugs = [
 {
     id: 1711200001,
     titre: "Le CSS fantôme",
@@ -29,20 +29,21 @@ const listeBugs = document.querySelector("#bug-grid")
 const compteurBugs = document.querySelector("#nombreBugs")
 const formulaireBugs = document.querySelector("#bugsForm")
 
-
+// Récuperer les valeurs des champs du formulaires
 const titleInput = document.getElementById("title");
 const autorInput = document.getElementById("autor");
 const severiteInput = document.getElementById("severite");
 const recompenseInput = document.getElementById("recompense");
 const descriptionInput = document.getElementById("description");
 
+// Récuperer les éléments pour afficher les messages d'erreur
 const errorTitle = document.getElementById("error-title");
 const errorAutor = document.getElementById("error-autor");
 const errorSeverite = document.getElementById("error-severite");
 const errorRecompense = document.getElementById("error-recompense");
 const errorDescription = document.getElementById("error-description");
 
-
+// Fonction d'affichage de la liste des bugs
 function afficherBugs() {
 
     if (bugs.length === 0){
@@ -66,14 +67,26 @@ function afficherBugs() {
                 <p>Récompense : ${bug.recompense}
             </div>
                 <button type="button" class="delete-button">
-                Supprimer
+                  Supprimer
                 </button>
         </article>
     `
     })
     listeBugs.innerHTML = contenuHTML.join(" ");
+
+    const deleteButtons = listeBugs.querySelectorAll(".delete-button")
+    deleteButtons.forEach (button => {
+      //Créer un listener
+      button.addEventListener ( "click" , event => {
+        // Récuperer l'id du film 
+        const article = button.closest(".bug")
+        const idBugs = parseInt(article.dataset.id)
+        supprimerBugs(idBugs)
+      })
+    })
 };
 
+// Fonction pour réinitialisé les messages d'erreurs
 function effacerErreur (){
     errorTitle.textContent = "" ;
     errorAutor.textContent = "" ;
@@ -82,6 +95,7 @@ function effacerErreur (){
     errorDescription.textContent = "" ;
 }
 
+// Fonctions de validation du formulaire
 function validerFormulaire () {
     let estValide = true;
 
@@ -104,8 +118,8 @@ function validerFormulaire () {
   }
 
   // Validation récompense
-  if(isNaN (recompenseInput.value) || recompenseInput.value <= 0){
-    errorRecompense.textContent = "La récompense doit être un nombre supérieur à 0";
+  if(isNaN (recompenseInput.value) || recompenseInput.value <= 5){
+    errorRecompense.textContent = "La récompense doit être un nombre supérieur à 5";
     estValide = false;
   }   
 
@@ -119,15 +133,29 @@ function validerFormulaire () {
 
 }
 
+//Supprimer le films selectionné par son id 
+function supprimerBugs(id){
+  
+  bugs = bugs.filter(function (bug) {
+    return bug.id !== id;
+  });
+  afficherBugs();
+}
+
 formulaireBugs.addEventListener("submit" , function(event) {
+
+    //empecher de raffraichir la page a chaque soumission du formulaire
     event.preventDefault()
 
+    //Réinitialiser les messages d'erreur
     effacerErreur()
 
+    //Vérifier si le formulaire est valide
     if (!validerFormulaire()) {
     return;
   }
 
+  // Ajouter les données dans un tableau temporaire 
   const nouveauBugs = {
     id: Date.now(),
     titre: titleInput.value.trim(),
@@ -137,11 +165,16 @@ formulaireBugs.addEventListener("submit" , function(event) {
     recompense: parseInt(recompenseInput.value , 10)
   }
 
+
   bugs.push(nouveauBugs)
 
+  // Réinitialiser le formulaire
   formulaireBugs.reset()
 
+  // Donner le nouvelle affichage des bugs
   afficherBugs()
 })
 
+
+// Affichage au premier chargement de la page 
 afficherBugs() ;
